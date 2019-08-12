@@ -83,9 +83,10 @@ class Game extends React.Component {
             const desc = move ?
                 'Go to move #' + move + " in column " + _step['move']['column'] + " and row " +  _step['move']['row'] :
                 'Go to game start';
+            const fontWeight = move == this.state.stepNumber ? 'bold' : 'normal' 
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <button onClick={() => this.jumpTo(move)} style={{fontWeight : fontWeight}}>{desc}</button>
                 </li>
             );
         });
