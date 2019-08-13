@@ -94,6 +94,7 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
+        const maximumNumberOfMoves = 9;
             
         const moves = history.map((_step, move) => {
             const desc = move ?
@@ -113,7 +114,7 @@ class Game extends React.Component {
             status = 'Winner : ' + winner['player'];
             colors = this.redWinningSquares(winner)
         } else {
-            status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+            status = (this.state.stepNumber === maximumNumberOfMoves) ? 'Draw' : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
 
         let buttonText = "Moves sorted by ascending order"
