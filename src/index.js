@@ -15,25 +15,26 @@ class Board extends React.Component {
         return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
     }
 
+    createBoard = () => {
+        let boardSquares = [];
+        for (let row = 0; row < 3; row++) {
+          let rowSquares = []
+          for (let column = 0; column < 3; column++) {
+            let squareIndex = (3 * row) + column
+            rowSquares.push(<span key={squareIndex}>{this.renderSquare(squareIndex)}</span>)
+          }
+          boardSquares.push(<div className="board-row" key={row}>{rowSquares}</div>)
+        }
+        return boardSquares;
+    }
+
     render() {
+
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {this.createBoard()}
             </div>
+            
         );
     }
 }
@@ -83,7 +84,7 @@ class Game extends React.Component {
             const desc = move ?
                 'Go to move #' + move + " in column " + _step['move']['column'] + " and row " +  _step['move']['row'] :
                 'Go to game start';
-            const fontWeight = move == this.state.stepNumber ? 'bold' : 'normal' 
+            const fontWeight = move === this.state.stepNumber ? 'bold' : 'normal' 
             return (
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)} style={{fontWeight : fontWeight}}>{desc}</button>
